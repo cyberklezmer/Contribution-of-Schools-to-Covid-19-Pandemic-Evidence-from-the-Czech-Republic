@@ -1,27 +1,127 @@
 %% LyX 2.3.4.2 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[sn-mathphys]{sn-jnl}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{hyperref}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\def\P{\mathbb{P}}
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
 
-\usepackage{lineno}
-\linenumbers
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
 
+% Use Unicode characters when possible
+\usepackage[utf8x]{inputenc}
+
+% textcomp package and marvosym package for additional characters
+\usepackage{textcomp,marvosym}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+% Use nameref to cite supporting information files (see Supporting Information section for more info)
+\usepackage{nameref,hyperref}
+
+% line numbers
+\usepackage[right]{lineno}
+
+% ligatures disabled
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+
+% color can be used to apply background shading to table cells only
+\usepackage[table]{xcolor}
+
+% array package and thick rules for tables
+\usepackage{array}
+
+% create "+" rule type for thick vertical lines
+\newcolumntype{+}{!{\vrule width 2pt}}
+
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth
+\newcommand\thickcline[1]{%
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+
+% Remove comment for double spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+% Text layout
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in 
+\textheight 8.75in
+
+% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
+% Captions will be left justified
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+\renewcommand{\figurename}{Fig}
+
+% Use the PLoS provided BiBTeX style
+% \bibliographystyle{plos2015}
+
+% Remove brackets from numbering in List of References
 \makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-
+\renewcommand{\@biblabel}[1]{\quad#1.}
 \makeatother
 
 
-\usepackage{babel}
+
+% Header and Footer with logo
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+%\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+%\setlength{\headheight}{27.023pt}
+%\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\today}
+
+%% Include all macros below
+
+\newcommand{\lorem}{{\bf LOREM}}
+\newcommand{\ipsum}{{\bf IPSUM}}
+
+%% end of PLOS template MACRO SECTION
+
+
+% ORIGINAL HEADING
+%\usepackage[utf8]{inputenc}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{hyperref}
+%\usepackage{graphicx}
+%\usepackage{babel}
+
+%\usepackage{lineno}
+%\linenumbers
+
+%\makeatletter
+%\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+%\providecommand{\tabularnewline}{\\}
+
+% END of ORIGINAL HEADING
+
+\newcommand{\maingraphics}[2][1]{\includegraphics[#2]{#1}}
+\def\P{\mathbb{P}}
+
 
 \def\rateiv{\includegraphics[width=0.25cm]{14.jpg}}
 \def\rateiii{\includegraphics[width=0.25cm]{24.jpg}}
@@ -29,67 +129,107 @@
 \def\ratei{\includegraphics[width=0.25cm]{44.jpg}}
 
 
+\def\brom{Cyril Brom}
+\def\drbohlav{Jakub Drbohlav}
+\def\slerka{Josef \v Slerka}
+\def\smid{Martin \v Sm\'\i d}
+\def\zajic{Milan Zaj\v\i\v cek}
+
+
 \begin{document}
-\title[Contribution of Schools to Covid-19 Pandemic]{Contribution of Schools to Covid-19 Pandemic: Evidence from Czechia}
+\vspace*{0.2in}
 
-\author*[1]{\fnm{Cyril} \sur{Brom}}\email{brom@ksvi.mff.cuni.cz}
+% Title must be 250 characters or less.
+\begin{flushleft}
+{\Large
+\textbf\newline{Contribution of schools to covid-19 pandemic: Evidence from Czechia} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+}
+\newline
+% Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
+\\
+\brom\textsuperscript{1\Yinyang*},
+\drbohlav\textsuperscript{2,3\Yinyang},
+\slerka \textsuperscript{2,4\Yinyang},
+\smid\textsuperscript{2,5\Yinyang},
+\zajic\textsuperscript{2,5\Yinyang}
+\\
+\bigskip
+\textbf{1} Faculty of Mathematics and Physics, Charles University, V Hole\v sovi\v ck\' ach 747/2, Praha 8, 18000, Czech Republic
+\\
+\textbf{2} Centre for Modelling of Biological and Social Processes, Na B\v rehu 497/15, Praha 9, 190 00, Czech Republic
+\\
+\textbf{3} Ministry of Education, Youth and Sports of the Czech Republic, Karmelitsk\' a 5, Praha 1, 118 12, Czech Republic
+\\
+\textbf{4} Faculty of Arts, Charles University, N\' am. J. Palacha 1/2, Praha 1, 116 38, Czech Republic
+\\
+\textbf{5} Department of Econometrics, Institute of Information Theory and Automation of the CAS, Pod Vod\' arenskou v\v e\v z\'\i 4, Praha 8, 182 00, Czech Republic
+\\
+\bigskip
 
-\author[2,3]{\fnm{Jakub} \sur{Drbohlav}}\email{Jakub.Drbohlav@msmt.cz}
-% \equalcont{These authors contributed equally to this work.}
+\Yinyang These authors contributed equally to this work.
 
-\author[2,4]{\fnm{Martin} \sur{\v Sm\'\i d}}\email{smid@utia.cas.cz}
-% \equalcont{These authors contributed equally to this work.}
+% Additional Equal Contribution Note
+% Also use this double-dagger symbol for special authorship notes, such as senior authorship.
+\ddag These authors also contributed equally to this work.
 
-\author[2,4]{\fnm{Milan} \sur{Zaj\'\i\v cek}}\email{zajicek@utia.cas.cz}
+% Current address notes
+%\textcurrency Current Address: Dept/Program/Center, Institution Name, City, State, Country % change symbol to "\textcurrency a" if more than one current address note
+% \textcurrency b Insert second current address 
+% \textcurrency c Insert third current address
 
-\affil*[1]{\orgdiv{Faculty of Mathematics and Physics}, \orgname{Charles University}, \orgaddress{\street{V Hole\v sovi\v ck\' ach 747/2}, \city{Praha 8}, \postcode{18000},  \country{Czech Republic}}}
+% Deceased author note
+%\dag Deceased
 
-\affil[2]{\orgname{Centre for Modelling of Biological and Social Processes}, \orgaddress{\street{Na B\v rehu 497/15}, \city{Praha 9}, \postcode{190 00}, \country{Czech Republic}}}
+% Group/Consortium Author Note
+%\textpilcrow Membership list can be found in the Acknowledgments section.
 
-\affil[3]{\orgname{Ministry of Education, Youth and Sports of the Czech Republic}, \orgaddress{\street{Karmelitsk\' a 5}, \city{Praha 1}, \postcode{118 12}, \country{Czech Republic}}}
+% Use the asterisk to denote corresponding authorship and provide email address in note below.
+* brom@ksvi.mff.cuni.cz
 
-\affil[4]{\orgdiv{Department of Econometrics}, \orgname{Institute of Information Theory and Automation of the CAS}, \orgaddress{\street{Pod Vod\' arenskou v\v e\v z\'\i 4}, \city{Praha 8}, \postcode{182 00}, \country{Czech Republic}}}
+\end{flushleft}
 
 
 
-\abstract{\textbf{Purpose:} 
+
+\section*{Abstract} \paragraph*{Purpose:} 
 It is unclear how much opening of schools during Covid-19 pandemic contributes to new SARS-CoV-2 infections among children. We investigated the impact of school opening with various mitigation measures (masks, rotations, mass testing) on growth rate of new cases in child cohorts ranging from kindergartens to upper secondary in Czechia, a country heavily hit by Covid-19, since April 2020 to June 2021.  
 
-\textbf{Methods:} 
+\paragraph*{Methods:} 
  Our primary method is comparison of the reported infections in age cohorts corresponding to school grades undergoing different regimes. When there is no opportunity for such a comparison, we estimate corresponding coefficients from a regression model. In both the cases, we assume that district-level infections in particular cohorts depend on the school attendance and the external environment in dependence on the current overall risk contact reduction.
 
-\textbf{Results:}
+\paragraph*{Results:}
 The estimates of in-cohort growth rates were significantly higher for normally opened schools compared to closed schools. When prevalence is comparable in the cohorts and general population, and no further measures are applied, the in-cohort growth reduction for closed kindergartens is 29\% (SE=11\%); primary: 19\% (7\%); lower secondary: 39\% (6\%); upper secondary: 47\% (6\%). For secondary education, mitigation measures reduce school-related growth 2-6 times.
 
 
-\textbf{Conclusion:}
-Considering more infectious SARS-CoV-2 variants and the `long covid' risk, mitigation measures in schools, especially in secondary levels, should be implemented for the next school year. Some infections, however, are inevitable, even in kindergartens (where mitigation measures are difficult to implement) and primary schools (where they may not work due to low adherence).}
+\paragraph*{Conclusion:}
+Considering more infectious SARS-CoV-2 variants and the `long covid' risk, mitigation measures in schools, especially in secondary levels, should be implemented for the next school year. Some infections, however, are inevitable, even in kindergartens (where mitigation measures are difficult to implement) and primary schools (where they may not work due to low adherence).
 
-\keywords{Covid-19, masks, mitigation measures, schools, kindergartens, Czechia
-}
+%\keywords{Covid-19, masks, mitigation %measures, schools, kindergartens, Czechia
+%}
 
+\linenumbers
 
-\maketitle
+%\maketitle
 
-\section{Introduction}
+\section*{Introduction}
 Closing schools for in-person education during the Covid-19 pandemics presents a controversial issue. During the first half of 2020, closing schools appeared to be one of the most effective intervention to mitigate the Covid-19 spread \cite{auger2020association, brauner2021inferring, haug_ranking_2020}; however, closed schools negatively impact children \cite{bignardi2021longitudinal, dipietro_impact_2020, ecdc2021report, ravens-sieberer_impact_2021}. Consequently, governments tended to open schools for the school year 2020/21, but with various safety measures; mask wearing and mass screening among others. Altogether, most of these measures appeared to reduce the risk of spreading the disease in schools \cite{lessler_household_2021, gettings2021mask, sharma2021understanding}. However, there is still uncertainty how much open schools contribute to the number of child infections; especially as concerns younger cohorts, including kindergartens wherein mitigation measures are difficult to implement. Children may be less susceptible to SARS-CoV-2 infection \cite{madewell2020household, sage_tfc_nodate} (but see also \cite{ecdc2021report}), but outbreaks occur even in preschool settings \cite{okarska2021sars} and number of school cases tend to increase when incidence in general population increases \cite{ismail_sars-cov-2_2021, varma2021covid, zimmerman_incidence_2021}.
 
-Czechia was among countries worst hit by the pandemic, with 14-days incidence per 100k inhabitants \textgreater 500 for most of the October 2020 – April 2021 period \cite {osoby} (Figure S\ref{fig:prevalence}). For weeks, educational institutions were closed for most children, but remained open for some; such as open for kindergartens but closed for all other educational levels from October-14-2020 to November-16-2020, or open for Grade 1-2 but closed for Grade 3-5 of the primary level from January-4-2021 to February-26-2021. Masks were required since September-17-2020 among staff and pupils in all educational levels except of kindergartens and regular mass screening of school children and staff started on April-12-2021. This created several unique “natural experiment” settings enabling to compare numbers of infections among similarly-aged cohorts that remained home versus those attending schools in person: with different mitigation measures in place.  
+Czechia was among countries worst hit by the pandemic, with 14-days incidence per 100k inhabitants \textgreater 500 for most of the October 2020 – April 2021 period \cite {osoby} (\nameref{SIElSu} Fig. \ref{fig:prevalence}). For weeks, educational institutions were closed for most children, but remained open for some; such as open for kindergartens but closed for all other educational levels from October-14-2020 to November-16-2020, or open for Grade 1-2 but closed for Grade 3-5 of the primary level from January-4-2021 to February-26-2021. Masks were required since September-17-2020 among staff and pupils in all educational levels except of kindergartens and regular mass screening of school children and staff started on April-12-2021. This created several unique “natural experiment” settings enabling to compare numbers of infections among similarly-aged cohorts that remained home versus those attending schools in person: with different mitigation measures in place.  
 
 Here, we use Czech nationwide data since April-6-2020 to July-4-2021 and a simple epidemiological-like model to infer increases in age-specific growth rate of incidence caused by in-person schooling (increases on the top of the baseline, which is distance education). In the model, the infections in the child cohorts depend on the overall magnitude of epidemic, its magnitude within the district and within the corresponding cohort, the latter in dependence on the current school opening regime. Hence, the model reflects the dependence of the effect not only on the regime introduced, but also on prevalence within the involved cohorts. We cluster children into four cohorts: kindergartens, primary schools (Grade 1-5) and lower (Grade 6-9) and upper (Grade 10-13) secondary schools.
 
 
-\section{Methods}
+\section*{Methods}
 
-\subsection{Data sources}
+\subsection*{Data sources}
 
-\subsubsection{Age and District Specific Incidence}
+\subsubsection*{Age and District Specific Incidence}
 
-To get the weekly numbers of reported infections for individual age cohorts, we used the national anonymized list of positively tested individuals \cite{osoby} including, among other things, the date of reporting the infection and the age. There are surely unreported infections; however, as we discuss in Suppl. Mat. Section  S\ref{sec:asc}, our results are quite robust in this respect as we primarily examine growth rates rather than absolute numbers.   
+To get the weekly numbers of reported infections for individual age cohorts, we used the national anonymized list of positively tested individuals \cite{osoby} including, among other things, the date of reporting the infection and the age. There are surely unreported infections; however, as we discuss in \nameref{SIElSu} Section  \ref{sec:asc}, our results are quite robust in this respect as we primarily examine growth rates rather than absolute numbers.   
 
-We use data since April-6-2020 (week 15/2020), as we regard prior data noisy, unreliable and suffering from small sample properties (the first case in Czechia was reported March-1-2020). The data series ends on July-4-2021 (week 26/2021). As we do not use data from weeks 27-35/2020 of summer vacation and those from the one-week winter vacation (53/20), this means 55 weeks. There are 77 districts, so we have 4235 observations, from which, however, some additional ones were excluded (see Section S\ref{sec:data} for details).
+We use data since April-6-2020 (week 15/2020), as we regard prior data noisy, unreliable and suffering from small sample properties (the first case in Czechia was reported March-1-2020). The data series ends on July-4-2021 (week 26/2021). As we do not use data from weeks 27-35/2020 of summer vacation and those from the one-week winter vacation (53/20), this means 55 weeks. There are 77 districts, so we have 4235 observations, from which, however, some additional ones were excluded (see \nameref{SIElSu} Section S\ref{sec:data} for details).
 
-\subsubsection{School Opening Regimes}
+\subsubsection*{School Opening Regimes}
 
 In addition to the complete closure, we distinguish three main regimes in which schools were opened: 
 \begin{itemize}
@@ -97,15 +237,15 @@ In addition to the complete closure, we distinguish three main regimes in which 
 \item with wearing masks for both teachers and pupils, 
 \item with masks and a weekly rotation regime (entire class in school one week, at home the other week). 
 \end{itemize}
-For each regime, we distinguish whether or not regular weekly antigen testing took place at schools. Which regimes took place at specific school levels is listed in Table S\ref{tab:measures}. 
+For each regime, we distinguish whether or not regular weekly antigen testing took place at schools. Which regimes took place at specific school levels is listed in \nameref{SIElSu} Table \ref{tab:measures}. 
 
-\subsubsection{Contact Restriction}
+\subsubsection*{Contact Restriction}
 
 To control for external (out of school) influence on the infections of children, we use the estimates of overall risk contact restrictions \cite{paqcovid} from a longitudinal covid-related study, surveying bi-weekly a representative panel of 2-3 thousand Czech citizens. This study also yields data on the weekly number of risk contacts.
 
-\subsection{Statistical Analysis}
+\subsection*{Statistical Analysis}
 
-In Czechia, numbers of children attending particular schools levels correspond well with particular age cohorts, because the entry time to the primary school is given by law and attending school is compulsory (including the final year in kindergartens). For instance, lower primary (Grade 1-5) includes 6-11-year-olds. Seven-to-ten-year-olds are almost exclusively primary school pupils; whereas, 6-year-olds attend either first grade or the final kindergarten year, and most 11-year-olds attend either primary (Grade 5) or lower secondary (Grade 6) school. See Section S\ref{sec:data} for details.
+In Czechia, numbers of children attending particular schools levels correspond well with particular age cohorts, because the entry time to the primary school is given by law and attending school is compulsory (including the final year in kindergartens). For instance, lower primary (Grade 1-5) includes 6-11-year-olds. Seven-to-ten-year-olds are almost exclusively primary school pupils; whereas, 6-year-olds attend either first grade or the final kindergarten year, and most 11-year-olds attend either primary (Grade 5) or lower secondary (Grade 6) school. See \nameref{SIElSu} Section \ref{sec:data} for details.
 
 The primary method we use to estimate the influence of individual school opening regimes is the comparison of close age cohorts for which the school regime differs by means of subtracting the observations (here infection numbers) corresponding to the same time and the same district.
 
@@ -119,13 +259,13 @@ We identified four opportunities for such a comparison.
 
 
 
-The details on the sub-cohort comparisons are summarized in Table S\ref{tab:sc}. For the values of the regime dummies, see Section S\ref{sec:data}.
+The details on the sub-cohort comparisons are summarized in \nameref{SIElSu} Table \ref{tab:sc}. For the values of the regime dummies, see \nameref{SIElSu} Section \ref{sec:data}.
 
 For the parameters which cannot be estimated this way (i.e., two close age sub-cohorts did not undergo a different regime) we used a secondary approach: the direct estimation from a regression model. 
 
-In both the methods, we examine the number of reported infections in the examined age cohort for each district and week. We assume that this number linearly depends on the previous-week numbers of infections -- the overall number, the number within own district and the number within own district and own cohort. In all the three cases, these numbers are adjusted by the contact restriction reported two weeks earlier and the previous-week rate of infectiousness. Additionally, the infections in the cohort within the district depends on the influence of schools, being equal to the previous-week infections in this cohort, multiplied by the sum of dummy variables corresponding to six considered opening regimes -- once the regime is applied, the variable is one while the remaining dummy variables are zero. When schools (for this cohort) are closed, all the dummies are zero. See Section S\ref{sec:methodsdetail} for details and for justification of this general model.     
+In both the methods, we examine the number of reported infections in the examined age cohort for each district and week. We assume that this number linearly depends on the previous-week numbers of infections -- the overall number, the number within own district and the number within own district and own cohort. In all the three cases, these numbers are adjusted by the contact restriction reported two weeks earlier and the previous-week rate of infectiousness. Additionally, the infections in the cohort within the district depends on the influence of schools, being equal to the previous-week infections in this cohort, multiplied by the sum of dummy variables corresponding to six considered opening regimes -- once the regime is applied, the variable is one while the remaining dummy variables are zero. When schools (for this cohort) are closed, all the dummies are zero. See \nameref{SIElSu} Section \ref{sec:methodsdetail} for details and for justification of this general model.     
 
-When comparing two cohorts, we assume both to follow their own version of the linear model described above (see (\ref{eq:x}) in Section S\ref{sec:methodsdetail}). The advantage here is that the regime covariates which do not differ between cohorts, cancel out, so our estimate is independent on these parameters. Moreover, even though we do not explicitly assume an identical impact of the external environment on both the sub-cohorts, these impacts are likely to be similar for the cohorts, so they more or less compensate by the subtractions, disturbing less the impact of the regime terms. Note that, once total closure is compared to some regime, the significant results of this estimation can be interpreted as a rejection of the hypothesis that the corresponding regime has no influence on infections.  
+When comparing two cohorts, we assume both to follow their own version of the linear model described above (see (\ref{eq:x}) in \nameref{SIElSu} Section \ref{sec:methodsdetail}). The advantage here is that the regime covariates which do not differ between cohorts, cancel out, so our estimate is independent on these parameters. Moreover, even though we do not explicitly assume an identical impact of the external environment on both the sub-cohorts, these impacts are likely to be similar for the cohorts, so they more or less compensate by the subtractions, disturbing less the impact of the regime terms. Note that, once total closure is compared to some regime, the significant results of this estimation can be interpreted as a rejection of the hypothesis that the corresponding regime has no influence on infections.  
 
 The direct estimation of the linear model, on the other hand, is less reliable, as it is more dependent on the choice of the general model; however, for the coefficients which cannot be obtained by cohort comparison, it is the only choice. 
 
@@ -133,7 +273,7 @@ Another advantage of the direct estimation is that it can be used to construct a
 \begin{equation}
 P_t
 \doteq \omega d_{t-1} c_{t-2}  \tilde P_{t-1}
-\\ + d_{t-1} S_{t-1} P_{t-1}
+ + d_{t-1} S_{t-1} P_{t-1}
 \label{eq:prevalence}
 \end{equation}
 where $P_t$ denotes {\em prevalence} within a cohort, i.e. the ratio of weekly new cases and the cohort size, and $\tilde P_t$ denotes the overall prevalence. The equation above may be equivalently expressed by means of growth $\rho_t$ of the prevalence within the cohort:
@@ -142,7 +282,7 @@ where $P_t$ denotes {\em prevalence} within a cohort, i.e. the ratio of weekly n
 \qquad G_t = \frac{\tilde P_t}{P_t}.
 \label{eq:rhodef}
 \end{equation}
-Here, $d_t$ is the infectiousness in time t, $c_t$ is the contact restriction (see Section S\ref{sec:epimodel}), $\omega$ is an estimated constant and 
+Here, $d_t$ is the infectiousness in time t, $c_t$ is the contact restriction (see \nameref{SIElSu} Section \ref{sec:epimodel}), $\omega$ is an estimated constant and 
 \begin{equation}
 S_t = \nu N_{t} + \mu M_{t} + \varrho R_{t} + \nu^\star N^\star_{t}
 + \mu^\star M^{\star}_{t} + \varrho^\star R^\star_{t} 
@@ -159,15 +299,15 @@ Importantly, because the model is linear, coefficients $\nu, \dots,\rho^\star$ a
 
 
 
-\section{Results}
+\section*{Results}
 
-We estimated the ``school regime" coefficients $\nu,\dots,\rho^\star$ by two variants of cohort comparison (if applicable) and two variants of direct estimation (see Section S\ref{sec:methodsdetail} for details); consequently, we made meta-estimates out of all the available estimates. The meta-estimates are computed as weighted averages of the direct estimates and available comparison ones with strong preference of the latter (see Section S\ref{sec:res} for details). To distinguish the quality of the meta-estimates, we have split them into the following four categories. 
+We estimated the ``school regime" coefficients $\nu,\dots,\rho^\star$ by two variants of cohort comparison (if applicable) and two variants of direct estimation (see \nameref{SIElSu} Section \ref{sec:methodsdetail} for details); consequently, we made meta-estimates out of all the available estimates. The meta-estimates are computed as weighted averages of the direct estimates and available comparison ones with strong preference of the latter (see \nameref{SIElSu} Section \ref{sec:res} for details). To distinguish the quality of the meta-estimates, we have split them into the following four categories. 
 \begin{enumerate}
     \item[\ratei] At least one source estimate is a comparison of a regime and the closure, where both the cohorts correspond to the same school level and are "interior", i.e. 7-year-olds (Grade 1/2 open) vs. 9-year-olds (Grade 3/4 closed). 
     \item[\rateii] At least one source estimate is a comparison of a regime and the closure such that either the comparison includes cohorts from different school levels (i.e. 5-year-olds [kindergarten open] vs. 7-year-olds  [Grade1/2 closed]) or a "boundary" cohort (i.e. only the last grade of some school level was opened while the rest was closed). In the latter case, because no age cohort existed that would include only individuals from the open grade, halves of the boundary cohorts had to be used. \item[\rateiii] At least one source estimate is a cohort comparison, but of two different regimes (e.g. masks and rotations). 
     \item[\rateiv] The meta-estimates based only on direct estimation from the regression model. 
 \end{enumerate}
-Clearly, the better category, the more reliable the estimate. The resulting estimates are listed in Table \ref{tab:metacomp} and Figure \ref{fig:metacomp}. Missing estimates refer to situations when schools were never opened in corresponding regimes. Apparently, upper secondary school coefficients are larger than lower secondary school coefficients, which are larger than primary school and kindergarten coefficients. For secondary education levels, mitigation measures reduces the coefficients notably; whereas, for primary schools, they remain similarly low no matter the regime. (For kindergartens, no mitigation measures were implemented: they were either open or closed.) 
+Clearly, the better category, the more reliable the estimate. The resulting estimates are listed in Table \ref{tab:metacomp} and Fig \ref{fig:metacomp}. Missing estimates refer to situations when schools were never opened in corresponding regimes. Apparently, upper secondary school coefficients are larger than lower secondary school coefficients, which are larger than primary school and kindergarten coefficients. For secondary education levels, mitigation measures reduces the coefficients notably; whereas, for primary schools, they remain similarly low no matter the regime. (For kindergartens, no mitigation measures were implemented: they were either open or closed.) 
 
 Further, for each school level and each regime, we evaluated the mean changes to the growth in the corresponding cohort associated with imposing the regime.
 In particular, we computed the hypothetical, mean relative increase $r$ of the growth after opening closed schools in that regime, and a hypothetical, mean relative decrease $e$ of the growth after imposing the regime into a school opened without any mitigation measure. These quantities can be computed for various $c_t$ (contact restriction) and $G_t$ (prevalence ratio, Eq. \ref{eq:rhodef}); here, for simplicity, we assumed identical previous prevalence in and outside the cohort ($G_t=1$) and no contact restriction ($c_t=1$), in which case  $r = \frac{\bullet}\omega$ and $e = 1-\frac{\omega+\bullet}{\omega + \nu} =\frac{\nu-\bullet}{\omega + \bullet}$ where $\bullet$ denotes the corresponding regime coefficient. The results are listed in Table \ref{tab:effects}. Again, we see that the impact of open schools is larger for older students than for younger ones, but mitigation measures reduce school-related growth substantially for the latter group. At the same time, school-related growth in kindergartens appears to be larger than growth in primary schools, but the difference is not significant.
@@ -205,7 +345,7 @@ $\omega$& $0.87^{***}(0.07)$& \rateiv& $0.96^{***}(0.09)$& \rateiv\\
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=7cm]{coefs.eps}
+%\includegraphics[width=7cm]{coefs.eps}
 \caption{Meta-estimates of regime coefficients}
 \label{fig:metacomp}
 \end{center}
@@ -240,29 +380,29 @@ closure&& $0.39^{***}(0.06)$&& $0.47^{***}(0.06)$\\
 \end{center}
 \end{table}
 
-Finally, for each cohort and time $t$, we evaluated $\rho_t$ serving as a prediction of the actual growth rate $R_t = \frac{P_{t}}{P_{t-1}}$ computed by means of the meta-estimates (i.e., those in Table \ref{tab:metacomp}). The results are depicted on Figure \ref{fig:rho} together with the decomposition of the (predicted) growth into the parts caused by individual regimes (i.e., the non-red parts on Figure \ref{fig:rho}) and the external, out-of-school environment (i.e., the red part). Unlike Table \ref{tab:effects}, Figure \ref{fig:rho} depicts the situation after accounting for changing contact restrictions in time and differing prevalence in individual child cohorts and general population. Hence, as concerns description of the situation in Czechia, Figure \ref{fig:rho} charts more accurate picture than Table \ref{tab:effects} alone. For instance, it can be noticed that even after accounting for contact restrictions and differing prevalence, contribution of open schools to growth in child cohorts was substantial. However, it was almost always lower compered to growth due to external, out-of-school environment.\footnote{An alternative approach could be to compute $\rho_t$ only by means of the estimates by Procedure DH; however, the results are similar, see Figure S\ref{fig:rhodh}.}
+Finally, for each cohort and time $t$, we evaluated $\rho_t$ serving as a prediction of the actual growth rate $R_t = \frac{P_{t}}{P_{t-1}}$ computed by means of the meta-estimates (i.e., those in Table \ref{tab:metacomp}). The results are depicted on Fig \ref{fig:rho} together with the decomposition of the (predicted) growth into the parts caused by individual regimes (i.e., the non-red parts on Fig \ref{fig:rho}) and the external, out-of-school environment (i.e., the red part). Unlike Table \ref{tab:effects}, Fig \ref{fig:rho} depicts the situation after accounting for changing contact restrictions in time and differing prevalence in individual child cohorts and general population. Hence, as concerns description of the situation in Czechia, Fig \ref{fig:rho} charts more accurate picture than Table \ref{tab:effects} alone. For instance, it can be noticed that even after accounting for contact restrictions and differing prevalence, contribution of open schools to growth in child cohorts was substantial. However, it was almost always lower compered to growth due to external, out-of-school environment.\footnote{An alternative approach could be to compute $\rho_t$ only by means of the estimates by Procedure DH; however, the results are similar, see \nameref{SIElSu} Fig \ref{fig:rhodh}.}
 
 
      
 
 \begin{figure}
-\begin{tabular}{cc}
-Kindergartens & Primary  \\
-\includegraphics[angle=270,width=6cm]{rho1.eps} &\includegraphics[angle=270,width=6cm]{rho2.eps}\\ 
- Lower secondary & Upper secondary \\
-\includegraphics[angle=270,width=6cm]{rho3.eps} & 
-\includegraphics[angle=270,width=6cm]{rho4.eps}
-\end{tabular}
+%\begin{tabular}{cc}
+%Kindergartens & Primary  \\
+%\includegraphics[angle=270,width=6cm]{rho1.eps} %&\includegraphics[angle=270,width=6cm]{rho2.eps}\\ 
+% Lower secondary & Upper secondary \\
+%\includegraphics[angle=270,width=6cm]{rho3.eps} & 
+%\includegraphics[angle=270,width=6cm]{rho4.eps}
+%\end{tabular}
 \caption{Growth $R_t = \frac{P_{t}}{P_{t-1}}$, its one-week prediction $\rho_t$ and its decomposition. Errorbars: 95\% prediction CI. Note that when the graph area is just red in a specific time, this typically means schools were closed that time. }
 \label{fig:rho}
 \end{figure}
 
 
-\section{Discussion}
+\section*{Discussion}
 
 The results suggest that opening any school level, including kindergartens, influenced the infections within corresponding student cohorts in Czechia. Yet children from all cohorts appeared to be infected more often outside schools then in relation to open schools. This picture agrees with the emerging view that Covid-19 infections in schools do occur, they can occur frequently when the background incidence in population is high, but schools are unlikely the key driver of the epidemic \cite{ecdc2021report, ismail_sars-cov-2_2021, lessler_household_2021, sharma2021understanding, zimmerman_incidence_2021}. 
 
-The results indicate that when lower and upper secondary schools are open, mitigation measures in these schools reduce the part of the growth which is school-related roughly 2-6 times, the effect of most effective measures not being much different from total closure (total closure would mean zero school-related growth). Such a reduction, however, is not apparent in primary schools (possibly because school-related growth is generally low therein). On the one hand, our results are not robust enough to pin down effectiveness of individual measures. Plus, our estimates for schools run without any mitigation measure are least robust. On the other hand, our estimated for schools run with face masks are more robust. Hence, altogether, these results support another emerging idea: that schools run with various mitigating measures, including face masks, have tens of percent lower risk of infection for students \cite{lessler_household_2021, gettings2021mask, leng2021quantifying}, but some of these effects may be weaker for primary schools \cite{gettings2021mask}. 
+The results indicate that when lower and upper secondary schools are open, mitigation measures in these schools reduce the part of the growth which is school-related roughly 2-6 times, the effect of most effective measures not being much different from total closure (total closure would mean zero school-related growth). Such a reduction, however, is not apparent in primary schools (possibly because school-related growth is generally low therein). On the one hand, our results are not robust enough to pin down effectiveness of individual measures. Plus, our estimates for schools run without any mitigation measure are least robust. On the other hand, our estimated for schools run with face masks are more robust. Hence, altogether, these results support another emerging idea: that schools run with various mitigating measures, including face masks, have tens of percent lower risk of infection for students \cite{budzyn2021pediatric, lessler_household_2021, gettings2021mask, leng2021quantifying}, but some of these effects may be weaker for primary schools \cite{gettings2021mask}. 
 
 Relatively low school-related growth for primary schools in Czechia agrees with other literature \cite{lessler_household_2021, galmiche2021exposures}. A new, surprising finding concerns kindergartens: the school-related growth rate does not appear to be particularly low therein. This supports another emerging idea that the difference in susceptibility/infectiousness between young children and adults may be lower than thought at the beginning of the pandemic (see \cite{ecdc2021report}). Plus, biological susceptibility/infectiousness can be obscured in kindergartens by these children being less able to adhere to hygienic norms and to keep distance among themselves and teachers.
 
@@ -271,42 +411,76 @@ The straightforward implication from this study is that when schools, especially
 
  
 
-The strength of the study lies in that it is based on over-year-long data series from a national database and a longitudinal study concerning behavior of Czech citizens during the pandemic. Plus, some of the robust estimates were drawn because of the unique Czech situation: some school grades were opened whereas others remained closed when general incidence was very high. The strengths also include robustness of the model with respect to various ad hoc specified external parameters (apart from infectiousness; see Section S\ref{sec:sd} for the respective sensitivity analysis). Our results are relatively robust with respect to the fact that some cases remain unreported (the ascertainment rate is non-unit). The main reason for this robustness is that we primarily study relative growth which is more or less independent of the ascertainment rate. Section S\ref{sec:asc} shows that the fact that some cases are not reported either does not disturb the analysis at all or our estimation procedures may be modified to accommodate this fact. For instance, under the natural assumption that school regimes including regular testing increase the ascertainment rate, our results do not change substantially (Section S\ref{sec:asc}).
+The strength of the study lies in that it is based on over-year-long data series from a national database and a longitudinal study concerning behavior of Czech citizens during the pandemic. Plus, some of the robust estimates were drawn because of the unique Czech situation: some school grades were opened whereas others remained closed when general incidence was very high. The strengths also include robustness of the model with respect to various ad hoc specified external parameters (apart from infectiousness; see  \nameref{SIElSu} Section \ref{sec:sd} for the respective sensitivity analysis). Our results are relatively robust with respect to the fact that some cases remain unreported (the ascertainment rate is non-unit). The main reason for this robustness is that we primarily study relative growth which is more or less independent of the ascertainment rate. \nameref{SIElSu} Section \ref{sec:asc} shows that the fact that some cases are not reported either does not disturb the analysis at all or our estimation procedures may be modified to accommodate this fact. For instance, under the natural assumption that school regimes including regular testing increase the ascertainment rate, our results do not change substantially (\nameref{SIElSu} Section \ref{sec:asc}).
 
 
-As in any “natural experiment” study, the general limitation is that the comparison cohorts are not truly randomized. Hence, infection numbers in these cohorts may be differentially influenced by uncontrolled factors. Evidence from other countries could strengthen the reliability of our results. Also, our estimates (Tables \ref{tab:metacomp}, \ref{tab:effects} and Figure \ref{fig:metacomp}) apply to situation without contact restrictions and the same prevalence in and outside the examined cohort; so rather than their value, their ordering and ratios should be interpreted. Nevertheless, our model itself is general and when using actual prevalences and contact restriction, it can predict growth as we did on Figure \ref{fig:rho}. Magnitudes of these particularized predictions (i.e., on Figure \ref{fig:rho}) do not differ much from the crude estimates (i.e., those in Tables \ref{tab:metacomp}, \ref{tab:effects} and on Figure \ref{fig:metacomp}). This is because for most of the examined period in Czechia, the higher overall prevalence in the population than in the examined cohorts (except for upper secondary level) had the tendency to counterbalance effects of reduced contacts (Figures S\ref{fig:prevrel}, S\ref{fig:fraction}). 
+As in any “natural experiment” study, the general limitation is that the comparison cohorts are not truly randomized. Hence, infection numbers in these cohorts may be differentially influenced by uncontrolled factors. Evidence from other countries could strengthen the reliability of our results. Also, our estimates (Tables \ref{tab:metacomp}, \ref{tab:effects} and Figure \ref{fig:metacomp}) apply to situation without contact restrictions and the same prevalence in and outside the examined cohort; so rather than their value, their ordering and ratios should be interpreted. Nevertheless, our model itself is general and when using actual prevalences and contact restriction, it can predict growth as we did on Fig \ref{fig:rho}. Magnitudes of these particularized predictions (i.e., on Fig \ref{fig:rho}) do not differ much from the crude estimates (i.e., those in Tables \ref{tab:metacomp}, \ref{tab:effects} and on Fig \ref{fig:metacomp}). This is because for most of the examined period in Czechia, the higher overall prevalence in the population than in the examined cohorts (except for upper secondary level) had the tendency to counterbalance effects of reduced contacts (\nameref{SIElSu} Figs  \ref{fig:prevrel}, \ref{fig:fraction}). 
 
 In conclusion, our findings indicate that school opening have a notable effect on school-related growth rate of infections, but it can be substantially reduced by means of mitigation measures, especially in secondary education levels. The challenging question remains how to increase safety in kindergartens and primary schools wherein mitigation measures appear to be difficult to implement effectively.
 
-\section{Declarations}
 
-\subsection{Funding} 
 
-Cyril Brom was partially supported by PRIMUS/HUM/03, a project financed by Charles University. No other funding was received to assist with the preparation of this manuscript.
+\section*{Supporting information}
 
-\subsection{Competing interests}
+\paragraph*{S1 File.}
+\label{SIElSu}
+{\bf Electronic supplement.} 
+
+\paragraph*{S2 Code and Data.}
+\label{SIGithub}
+{\bf GitHub repository.} \url{https://github.com/cyberklezmer/schoolpaper}.
+
+\section*{Declarations}
+
+\subsection*{Funding} 
+
+Cyril Brom was partially supported by PRIMUS/HUM/03, a project financed by Charles University. Josef \v Slerka was supported by the European Regional Development Fund-Project “Creativity and Adaptability as Conditions of the Success of 
+Europe in an Interrelated World” (No. CZ.02.1.01/0.0/0.0/16\_019/0000734).
+
+\subsection*{Competing interests}
 
 Jakub Drbohlav is employed by Czech Ministry of Education, Youth and Sports and he is a member of the team responsible for handling the Covid-19 pandemic from the perspective of this ministry. Cyril Brom has been contracted by this ministry as external researcher responsible for conducting literature reviews concerning Covid-19 spread in school settings for the purpose of policy making. Other authors declare no competing interests; especially, they have no financial or proprietary interests in any material discussed in this article.
 
-\subsection{Availability of data and code}
+%\subsection*{Availability of data and code}
 
-All data are available on \url{https://github.com/cyberklezmer/schoolpaper}.
+%All data are available on \url{https://github.com/cyberklezmer/schoolpaper}.
 
-\subsection {Ethics approval}
+%\subsection*{Ethics approval}
 
-Ethics approval was waived because the study works only with anonymized, national open data.
+%Ethics approval was waived because the study works only with anonymized, national open data.
 
-\subsection {Consent to participate / Consent for publication}
+%\subsection*{Consent to participate / Consent for publication}
 
-Not applicable.
+%Not applicable.
 
 
-\bigskip
 
-\noindent {\bf Acknowledgment.} The authors are grateful to Ján Palguta and Arnošt Komárek for valuable comments and suggestions. 
+%\section*{Author contributions}
 
-% \bibliographystyle{plain}
+%\paragraph*{Conceptualization:}	\brom,	\drbohlav,	\slerka,	\smid,	\zajic
+%\paragraph*{Data curation:}				\smid	
+%\paragraph*{Formal analysis:}				\smid	
+%\paragraph*{Funding acquisition:}			\slerka		
+%\paragraph*{Methodology:}	\brom,	\drbohlav,		\smid,	\zajic
+%\paragraph*{Project administration:}			\slerka		
+%\paragraph*{Resources:}			\slerka		
+%\paragraph*{Software:}				\smid	
+%\paragraph*{Visualization:}				\smid
+%\paragraph*{Writing – original draft:}	\brom,			\smid	
+%\paragraph*{Writing – review \& editing:}	\brom,			\smid
+
+
+\section*{Acknowledgment} 
+
+The authors are grateful to Ján Palguta 
+%and Arnošt Komárek 
+for valuable comments and suggestions. 
+
+\nolinenumbers
+
+ \bibliographystyle{plain}
 \bibliography{schools}
+
 
 \newpage
 
@@ -356,7 +530,7 @@ where $\alpha', \beta', \gamma'$ are estimated coefficients. The advantage here 
 $$
 U_t = \nu \Delta N_{t-1} + \dots + \varrho^\star \Delta R^\star_{t-1}  
 \qquad \Delta N_{t}= N^1_{t}-N^2_{t},\dots,
-\Delta R^\star_t = R^{\star 1}_{t}-R^{\star 2}_{t´};
+\Delta R^\star_t = R^{\star 1}_{t}-R^{\star 2}_{t};
 $$
 Here, the requirements for variability of covariates are less strict than above. For instance, in the case of primary schools mentioned above, it suffices that $M^1_t \neq M^2_t$, $t\in T$ for some period $T$ and $M^1_t = M^2_t$, perhaps equal to zero, $t\notin T$. Note that, contrary to Estimation procedure C, the estimation does not depend on values of $M$ when they are equal, which may be seen as an advantage of Estimation procedure CC. On the other hand, once different regimes are applied for the two sub-cohorts, as in the example above with last grades of lower secondary schools open, and the sub-cohorts are treated equally otherwise, we get $U_t=(\mu - \rho) \chi_{\{M^1_t \neq R^1_t\}}(t)$ where $\chi$ is a characteristic function, i.e. only a difference of $\mu - \rho$ is estimable while the individual parameters are not identifiable. For the C procedure, things are other way around: both the regime coefficients (i.e., $\mu$, $\rho$) may be estimated; however, observations during which the regimes did not differ have to be used.\footnote{Again, the significant values may serve for the proof that the opening in the particular regime influences infections.}
 
@@ -448,7 +622,7 @@ the infection and the age; the population and district-level series $Y_t$ and $Y
     \centering
     \includegraphics[width=0.5\textwidth]{cy}
     \caption{Blue: $c_{t-2}$ -- contact restriction two weeks earlier.  Red: $Y_t$ -- weekly cases}
-    \label{fig:fraction}
+    \label{fig:restriction}
 \end{figure}
 
 
@@ -499,6 +673,7 @@ June-30 & \multicolumn{4}{c}{end of school year}
 
 \begin{table}
 \begin{center}
+\small
 \begin{tabular}{l|cccc}
 & Kindergartens & Primary & Lower secondary & Upper secondary  \\ \hline
 Group 1 & 5 years old & 7 years old & Grade 9 & Grade 13 \\
@@ -860,7 +1035,7 @@ X_{i,t} = \alpha_i b_{t-1} Y_{t-1} + \beta_i b_{t-1} Y_{i,t-1} + \gamma b_{t-1} 
 + e_{i,t},\qquad b_{t-1} = d_{t-1} c_{t-2}
 \label{eq:g}
 \end{equation}
-Here, $c_{t}$ is the overall contact reduction reported by the longitudinal sociological study \cite{paqcovid} and $d_t$ is the rate of infectiousness. The time lag two weeks of the contact restriction was chosen as that maximizing the correlation: $\max_\tau \mathrm{corr}(Y_t,c_{t-\tau} Y_{t-1})$, the infection rate was determined as $d_t = w_t r_t i_t$. Here, $w_t = (1 + \varsigma \cos(at+b))$ -- where $\varsigma = 0.18$, $a$ and $b$ are set so that the period is one-year period and the peak is on January, 10th -- is a cyclic component reflecting the (direct or indirect) influence of weather conditions. Further, $r_t$ is the course of infectiousness, determined by the composition of the virus variants present in Czechia, which we assumed to be constant, equal to $r^0=1.55$, up to the end of 2020, linear up to March-01-2021 (due to alpha variant onset), and then constant, equal to $r^1=2.44$. Finally, $i_t= (1-\alpha \iota_t)$ is the effect of natural immunization, where $\alpha=0.4$ is the ascertainment rate and $\iota_t$ is the ratio of total reported infections within the examined cohorts (i.e. children from age 4 to 19 and the half of the cohort of 20-year-olds).  As no children younger than 16 were vaccinated by June 2021 and only a small minority of students over 16 had got their first dose by that time, we did not include the effect of vaccination in $d_t$. The parameters $\varsigma, r^0, r^1 $ we obtained by estimation; notably, the value of $\varsigma$ is very close to that obtained independently by \cite{gavenvciak2021seasonal}. The ascertainment rate $\alpha$ has been set according the rate of respondents of \cite{paqcovid} suffering from typical covid symptoms who underwent testing. See Figure \ref{fig:dt} for the course of $d_t$ and its empirical counterparts, and also Table \ref{tab:global} for the estimation of homogenized version of (\ref{eq:g}):
+Here, $c_{t}$ is the overall contact reduction reported by the longitudinal sociological study \cite{paqcovid} and $d_t$ is the rate of infectiousness. The time lag two weeks of the contact restriction was chosen as that maximizing the correlation: $\max_\tau \mathrm{corr}(Y_t,c_{t-\tau} Y_{t-1})$, the infection rate was determined as $d_t = w_t r_t i_t$. Here, $w_t = (1 + \varsigma \cos(at+b))$ -- where $\varsigma = 0.18$, $a$ and $b$ are set so that the period is one-year period and the peak is on January, 10th -- is a cyclic component reflecting the (direct or indirect) influence of weather conditions. Further, $r_t$ is the course of infectiousness, determined by the composition of the virus variants present in Czechia, which we assumed to be constant, equal to $r^0=1.55$, up to the end of 2020, linear up to March-01-2021 (due to alpha variant onset), and then constant, equal to $r^1=2.44$. Finally, $i_t= (1-\alpha \iota_t)$ is the effect of natural immunization, where $\alpha=0.4$ is the ascertainment rate and $\iota_t$ is the ratio of total reported infections within the examined cohorts (i.e. children from age 4 to 19 and the half of the cohort of 20-year-olds).  As no children younger than 16 were vaccinated by June 2021 and only a small minority of students over 16 had got their first dose by that time, we did not include the effect of vaccination in $d_t$. The parameters $\varsigma, r^0, r^1 $ we obtained by estimation; notably, the value of $\varsigma$ is very close to that obtained independently by Gaven\v ciak, et al.\footnote{Seasonal variation in SARS-CoV-2 transmission in temperate climates. medRxiv (2021)} The ascertainment rate $\alpha$ has been set according the rate of respondents of \cite{paqcovid} suffering from typical covid symptoms who underwent testing. See Figure \ref{fig:dt} for the course of $d_t$ and its empirical counterparts, and also Table \ref{tab:global} for the estimation of homogenized version of (\ref{eq:g}):
 \begin{equation}
 X_{i,t} = \alpha h s_i b_{t-1} Y_{t-1} + \beta h b_{t-1} Y_{i,t-1} + \gamma b_{t-1} X_{i,t-1}
 + e_{i,t}
@@ -892,7 +1067,7 @@ $\gamma$& $0.2^{***}(0.01)$& $0.15^{***}(0.01)$& $0.16^{***}(0.01)$& $0.28^{***}
 
 
 
-\section{Sensitivity analysis -- variation of $d_t$}
+\section{Sensitivity analysis -- variation of infectiousness}
 \label{sec:sd}
 
 A question may arise, to what extent our results are dependent on the choice of model parameters. In the present section, we show how the results change when the "course of infection" $d_t$ is altered, namely when the "amplitude" parameter $\varsigma$, originally equal to $0.18$ (see Section \ref{sec:epimodel}), is doubled, i.e. $\varsigma=0.36$. Figure \ref{fig:dtalt} shows that the altered curve may be regarded as valid; it  fits better the actual data in spring 2021 for the price of a worse fit in winter. Figure \ref{fig:metacompalt} shows the results given the altered $d_t$. A comparison with Figure \ref{fig:metacomp} shows that even though the actual values vary slightly, their ratio is similar. 
